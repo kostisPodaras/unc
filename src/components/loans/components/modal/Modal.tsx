@@ -7,17 +7,19 @@ import TextField from "@material-ui/core/TextField";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import withStyles from "@material-ui/core/styles/withStyles";
 
+import { Loan as LoanProps } from "data";
+
 interface ModalProps {
-  handleCreate: any;
   classes: any;
   toggleValue: boolean;
-  setToggleValue: any;
+  handleCreate: (newLoan: LoanProps) => void;
+  setToggleValue: (prevState: boolean) => void;
 }
 
 const Loans: React.FC<ModalProps> = ({
-  handleCreate,
   classes,
   toggleValue,
+  handleCreate,
   setToggleValue,
 }): JSX.Element => {
   const [amount, setAmount] = useState("");

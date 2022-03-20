@@ -4,7 +4,6 @@ import AddIcon from "@material-ui/icons/Add";
 import { Grid, List } from "@material-ui/core";
 import ListItem from "@material-ui/core/ListItem";
 import Typography from "@material-ui/core/Typography";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 import { Loan as LoanProps } from "data";
@@ -12,8 +11,8 @@ import { Loan as LoanProps } from "data";
 import { Loan, Modal } from "./components";
 interface EnhancedLoanProps {
   loans: LoanProps[];
-  handleDelete: any;
-  handleCreate: any;
+  handleDelete: (id: string) => void;
+  handleCreate: (newLoan: LoanProps) => void;
   classes: any;
 }
 
@@ -29,19 +28,23 @@ const Loans: React.FC<EnhancedLoanProps> = ({
     <>
       <Typography variant="body1">Your Loans</Typography>
       <Grid item>
-        <List>
-          {loans.map(({ id, organisation, amount, startDate }) => (
-            <ListItem key={id}>
-              <Loan
-                organisation={organisation}
-                amount={amount}
-                startDate={startDate}
-                id={id}
-                handleDelete={handleDelete}
-              />
-            </ListItem>
-          ))}
-        </List>
+        {!!loans.length ? (
+          <List>
+            {loans.map(({ id, organisation, amount, startDate }) => (
+              <ListItem key={id}>
+                <Loan
+                  organisation={organisation}
+                  amount={amount}
+                  startDate={startDate}
+                  id={id}
+                  handleDelete={handleDelete}
+                />
+              </ListItem>
+            ))}
+          </List>
+        ) : (
+          <p>No loans yet</p>
+        )}
       </Grid>
 
       <Fab
